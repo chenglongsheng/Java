@@ -7,6 +7,10 @@ import java.util.concurrent.FutureTask;
 /**
  * 创建线程的三种方式：实现Callable接口---JDK 5.0新增
  *
+ * 1.call()可以有返回值
+ * 2.call()可以抛出异常，被外面的操作捕获，获取异常信息
+ * 3.Callable是支持泛型的
+ *
  * @author chenglongsheng
  * @create 2021-04-14 18:06
  */
