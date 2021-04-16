@@ -11,6 +11,40 @@ import org.junit.Test;
 public class StringTest {
 
     /*
+    String的实例化方式：
+    方式一:通过字面量定义的方式
+    方式二：通过new + 构造器的方式
+
+    面试题:String s = new String("abc");方式创建对象，在内存中创建几个对象?
+
+        两个，一个是堆空间中new结构，另一个是char[]对应的的常量池中的数据："abc"
+     */
+    @Test
+    public void Test2() {
+        String s1 = "javaEE";
+        String s2 = "javaEE";
+
+        // 通过new+ 构造器的方式：此时的s3和s4保存的地址值，是在数据的堆空间
+        String s3 = new String("javaEE");
+        String s4 = new String("javaEE");
+
+        System.out.println(s1 == s2);
+        System.out.println(s1 == s3);
+        System.out.println(s1 == s4);
+        System.out.println(s3 == s4);
+
+        System.out.println("*************");
+        Person p1 = new Person("Tom", 12);
+        Person p2 = new Person("Tom", 12);
+
+        System.out.println(p1.name.equals(p2.name));
+        System.out.println(p1.name == p2.name);
+
+        p1.name = "Jerry";
+        System.out.println(p2.name);
+    }
+
+    /*
     1.String声明为final，不可被继承
     2.String实现了Serializable接口：表示字符串是支持序列化的
             实现了Comparable接口：表示String可以比较大小
@@ -23,7 +57,7 @@ public class StringTest {
     6.字符串常量池时不会储存相同内容的字符串的。
      */
     @Test
-    public void Test1(){
+    public void Test1() {
 
         String s1 = "abc";
         String s2 = "abc";
@@ -34,7 +68,7 @@ public class StringTest {
 
         System.out.println("*************");
         String s4 = "abc";
-        s4+="def";
+        s4 += "def";
         System.out.println(s4);
 
         System.out.println("*************");
