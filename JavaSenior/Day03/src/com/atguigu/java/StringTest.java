@@ -11,6 +11,35 @@ import org.junit.Test;
 public class StringTest {
 
     /*
+    结论：
+    1.常量与常量的拼接结果在常量池。且常量池中不会存在相同内容的常量
+    2.只要其中有一个是变量，结果就在堆中
+    3.如果拼接结果调用intern()，返回值就在常量池中
+     */
+    @Test
+    public void test3() {
+        String s1 = "java";
+        String s2 = "EE";
+
+        String s3 = "javaEE";//字面量连接是同一个
+        String s4 = "java" + "EE";//两个字面量连接
+        String s5 = s1 + "EE";
+        String s6 = "java" + s2;
+        String s7 = s1 + s2;
+
+        System.out.println(s3==s4);
+        System.out.println(s3==s5);
+        System.out.println(s3==s6);
+        System.out.println(s3==s7);
+        System.out.println(s5==s6);
+        System.out.println(s5==s7);
+        System.out.println(s5==s7);
+
+        String s8 = s5.intern();
+        System.out.println(s3 == s8);
+    }
+
+    /*
     String的实例化方式：
     方式一:通过字面量定义的方式
     方式二：通过new + 构造器的方式
@@ -20,7 +49,7 @@ public class StringTest {
         两个，一个是堆空间中new结构，另一个是char[]对应的的常量池中的数据："abc"
      */
     @Test
-    public void Test2() {
+    public void test2() {
         String s1 = "javaEE";
         String s2 = "javaEE";
 
@@ -57,7 +86,7 @@ public class StringTest {
     6.字符串常量池时不会储存相同内容的字符串的。
      */
     @Test
-    public void Test1() {
+    public void test1() {
 
         String s1 = "abc";
         String s2 = "abc";
