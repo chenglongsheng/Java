@@ -32,12 +32,39 @@ public class StringDome2 {
         return null;
     }
 
-    @Test
-    public void testGetMaxSameString(){
-        String str1 = "abcwerthello1yuiodef";
-        String str2 = "cvhello1bnm";
-        String maxSameString = getMaxSameString(str1, str2);
-        System.out.println(maxSameString);
+    //多个数量相同的字串
+    public String[] getMaxSameSubString(String str1, String str2) {
+        if (str1 != null && str2 != null) {
+            StringBuffer sBuffer = new StringBuffer();
+            String maxString = (str1.length() > str2.length()) ? str1 : str2;
+            String minString = (str1.length() > str2.length()) ? str2 : str1;
 
+            int len = minString.length();
+            for (int i = 0; i < len; i++) {
+                for (int x = 0, y = len - i; y <= len; x++, y++) {
+                    String subString = minString.substring(x, y);
+                    if (maxString.contains(subString)) {
+                        sBuffer.append(subString + ",");
+                    }
+                }
+                System.out.println(sBuffer);
+                if (sBuffer.length() != 0) {
+                    break;
+                }
+            }
+            String[] split = sBuffer.toString().replaceAll(",$", "").split("\\,");
+            return split;
+        }
+        return null;
+    }
+
+    @Test
+    public void testGetMaxSameString() {
+        String str1 = "abcwerthelloyuiodefabcde";
+        String str2 = "cvhellobnmabcde";
+        String maxSameString = getMaxSameString(str1, str2);
+        String[] maxSameSubString = getMaxSameSubString(str1, str2);
+        System.out.println(maxSameString);
+        System.out.println(maxSameSubString);
     }
 }
