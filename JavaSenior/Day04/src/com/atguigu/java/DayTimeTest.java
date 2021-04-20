@@ -4,11 +4,12 @@ import org.junit.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
  * jdk 8之前的日期时间的API测试
- *
+ * <p>
  * 1.System类中currentTimeMillis();
  * 2.java.util.Date和子类java.sql.Date
  * 3.SimpleDateFormat
@@ -56,5 +57,38 @@ public class DayTimeTest {
         Date date = sdf1.parse(birth);
         java.sql.Date birthDate = new java.sql.Date(date.getTime());
         System.out.println(birthDate);
+    }
+
+
+    /*
+    Calendar日历类
+     */
+    @Test
+    public void testCalendar() {
+        Calendar calendar = Calendar.getInstance();
+
+        int days = calendar.get(Calendar.DAY_OF_MONTH);
+        System.out.println(days);
+        System.out.println(calendar.get(Calendar.DAY_OF_YEAR));
+
+        calendar.set(Calendar.DAY_OF_MONTH,22);
+        days = calendar.get(Calendar.DAY_OF_MONTH);
+        System.out.println(days);
+
+        calendar.add(Calendar.DAY_OF_MONTH,3);
+        days = calendar.get(Calendar.DAY_OF_MONTH);
+        System.out.println(days);
+
+        calendar.add(Calendar.DAY_OF_MONTH,-3);
+        days = calendar.get(Calendar.DAY_OF_MONTH);
+        System.out.println(days);
+
+        Date date = calendar.getTime();
+        System.out.println(date);
+
+        Date date1 = new Date();
+        calendar.setTime(date1);
+        days = calendar.get(Calendar.DAY_OF_MONTH);
+        System.out.println(days);
     }
 }
