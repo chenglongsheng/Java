@@ -2,6 +2,8 @@ package com.atguigu.exer;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 /**
  * @author chenglongsheng
  * @create 2021-04-18 13:54
@@ -47,7 +49,7 @@ public class StringDome2 {
                         sBuffer.append(subString + ",");
                     }
                 }
-                System.out.println(sBuffer);
+//                System.out.println(sBuffer);
                 if (sBuffer.length() != 0) {
                     break;
                 }
@@ -65,6 +67,6 @@ public class StringDome2 {
         String maxSameString = getMaxSameString(str1, str2);
         String[] maxSameSubString = getMaxSameSubString(str1, str2);
         System.out.println(maxSameString);
-        System.out.println(maxSameSubString);
+        System.out.println(Arrays.toString(maxSameSubString));
     }
 }
