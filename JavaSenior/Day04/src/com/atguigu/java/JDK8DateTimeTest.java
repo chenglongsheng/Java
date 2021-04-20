@@ -2,9 +2,7 @@ package com.atguigu.java;
 
 import org.junit.Test;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.Date;
 
 /**
@@ -54,5 +52,27 @@ public class JDK8DateTimeTest {
         LocalDate localDate1 = localDate.withDayOfMonth(22);
         System.out.println(localDate);
         System.out.println(localDate1);
+    }
+
+    /*
+    Instant
+    类似java.util.Date
+     */
+
+    @Test
+    public void test2(){
+        Instant instant = Instant.now();
+        System.out.println(instant);
+        // 时间偏移量
+        OffsetDateTime offsetDateTime = instant.atOffset(ZoneOffset.ofHours(8));
+        System.out.println(offsetDateTime);
+
+        // 获取自1970年1月1日0时0分0秒（UTC）开始的毫秒数
+        long milli = instant.toEpochMilli();
+        System.out.println(milli);
+
+        // 通过给定的毫秒数，获取Instant实例-->Date(long millis)
+        Instant instant1 = Instant.ofEpochMilli(1618925531763L);
+        System.out.println(instant1);
     }
 }
