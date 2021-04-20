@@ -49,4 +49,12 @@ public class DayTimeTest {
         System.out.println(date2);
     }
 
+    @Test
+    public void testExercise() throws ParseException {
+        String birth = "2020-09-09";
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = sdf1.parse(birth);
+        java.sql.Date birthDate = new java.sql.Date(date.getTime());
+        System.out.println(birthDate);
+    }
 }
