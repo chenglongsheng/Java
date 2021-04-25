@@ -40,6 +40,7 @@ public class SeasonTest1 {
 
         for (int i = 0; i < values.length; i++) {
             System.out.println(values[i]);
+            values[i].show();
         }
 
         System.out.println("**********************");
@@ -55,15 +56,41 @@ public class SeasonTest1 {
         //valueOf(String str)
         Season1 winter = Season1.valueOf("WINTER");
         System.out.println(winter);
+
+        winter.show();
     }
 }
 
-enum Season1 {
+interface Info {
+    void show();
+}
+
+enum Season1 implements Info {
     //提供枚举类的对象，多个对象之间用","隔开，结尾用";"
-    SPRING("春天", "1"),
-    SUMMER("夏天", "2"),
-    AUTUMN("秋天", "3"),
-    WINTER("冬天", "4");
+    SPRING("春天", "1") {
+        @Override
+        public void show() {
+            System.out.println("春天在哪里？");
+        }
+    },
+    SUMMER("夏天", "2") {
+        @Override
+        public void show() {
+            System.out.println("宁静的夏天");
+        }
+    },
+    AUTUMN("秋天", "3") {
+        @Override
+        public void show() {
+            System.out.println("分手的季节");
+        }
+    },
+    WINTER("冬天", "4") {
+        @Override
+        public void show() {
+            System.out.println("大约在冬季");
+        }
+    };
 
     // 声明Season对象的属性
     private final String seasonName;
@@ -85,4 +112,9 @@ enum Season1 {
     public String getSeasonDesc() {
         return seasonDesc;
     }
+
+//    @Override
+//    public void show() {
+//        System.out.println("这是一个季节");
+//    }
 }
