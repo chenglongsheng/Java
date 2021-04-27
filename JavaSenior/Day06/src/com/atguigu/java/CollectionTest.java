@@ -34,6 +34,17 @@ public class CollectionTest {
 
         Collection coll1 = Arrays.asList(123, 354);//true
         System.out.println(coll.containsAll(coll1));//判断coll1中所有元素是否都存在于当前集合中
+    }
 
+    @Test
+    public void test2(){
+        // remove()从当前集合中移除元素
+        Collection coll = new ArrayList();
+        coll.add(123);
+        coll.add(456);
+        coll.add(789);
+        System.out.println(coll);
+        coll.remove(456);
+        System.out.println(coll);
     }
 }
