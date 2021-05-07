@@ -4,7 +4,7 @@ package com.atguigu.java1;
  * @author chenglongsheng
  * @create 2021-04-29 15:02
  */
-public class User {
+public class User implements Comparable {
     private String name;
     private int age;
 
@@ -57,5 +57,22 @@ public class User {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + age;
         return result;
+    }
+
+    // 名字从大到小排序,年龄从小到大排序
+    @Override
+    public int compareTo(Object o) {
+        if (o instanceof User) {
+            User user = (User) o;
+//            return -this.name.compareTo(user.name);
+            int compare = -this.name.compareTo(user.name);
+            if (compare != 0) {
+                return compare;
+            } else {
+                return Integer.compare(this.age, user.age);
+            }
+        } else {
+            throw new RuntimeException("输入类型不匹配");
+        }
     }
 }
