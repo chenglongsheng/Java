@@ -60,6 +60,13 @@ import java.util.Map;
  * MIN_TREEIFY_CAPACITY：桶中的Node被树化时最小的hash表容量:64
  *
  * 四、linkedHashMap的底层实现原理
+ *  源码中：
+ *        static class Entry<K,V> extends HashMap.Node<K,V> {
+ *              Entry<K,V> before, after;//能够记录添加的元素的先后顺序
+ *              Entry(int hash, K key, V value, Node<K,V> next) {
+ *                 super(hash, key, value, next);
+ *              }
+ *          }
  *
  * @author chenglongsheng
  * @create 2021-05-07 11:03
