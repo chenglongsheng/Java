@@ -2,6 +2,8 @@ package com.atguigu.java;
 
 import org.junit.Test;
 
+import java.util.List;
+
 /**
  * 如何自定义泛结构：泛型类、泛型接口；泛型方法
  * <p>
@@ -37,4 +39,12 @@ public class GenericTest1 {
         subOrder1.setOrderT("order1:S");
     }
 
+    @Test
+    public void test3() {
+        Order<String> order = new Order<>();
+        Integer[] arr = new Integer[]{1, 2, 3, 4, 5};
+        // 泛型方法在调用时，指明泛型参数的类型
+        List<Integer> list = order.copyFromArrayToList(arr);
+        System.out.println(list);
+    }
 }

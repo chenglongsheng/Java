@@ -1,5 +1,8 @@
 package com.atguigu.java;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 自定义泛型类
  *
@@ -41,5 +44,17 @@ public class Order<T> {
                 ", orderId=" + orderId +
                 ", orderT=" + orderT +
                 '}';
+    }
+
+    // 泛型方法：在方法中出现了泛型结构，泛型参数与类的泛型参数没有任何联系
+    // 泛型方法所属的类是不是泛型类都没有关系
+    // 泛型方法，可以声明为静态的。因为泛型参数是在调用时确定的，并非在实例化类时确定
+    public static <E> List<E> copyFromArrayToList(E[] arr) {
+        ArrayList<E> list = new ArrayList<>();
+
+        for (E e : arr) {
+            list.add(e);
+        }
+        return list;
     }
 }
