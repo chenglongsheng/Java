@@ -2,6 +2,7 @@ package com.atguigu.java2;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -50,8 +51,28 @@ public class GenericTest {
         list = list1;
         list = list2;
 
-        print(list1);
-        print(list2);
+//        print(list1);
+//        print(list2);
+
+
+        List<String> list3 = new ArrayList<>();
+        list3.add("AA");
+        list3.add("BB");
+        list3.add("CC");
+
+        list = list3;
+        /*
+        添加：对于List<?>就不能对其内部添加数据
+        除了添加null以外
+         */
+//        list.add("DD");
+//        list.add("?");
+
+        list.add(null);
+
+        Object o = list.get(0); // 允许读取数据
+        System.out.println(o);
+
     }
 
     public void print(List<?> list) {
