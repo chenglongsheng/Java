@@ -137,6 +137,10 @@ public class FileReaderWriter {
             File srcFile = new File("hello.text");
             File destFile = new File("hello2.text");
 
+            // 不能使用字符流来处理图片等字节资源
+//            File srcFile = new File("yasuogou.jpg");
+//            File destFile = new File("yasuogou1.jpg");
+
             //2.创建输入流和输出流的对象
             fr = new FileReader(srcFile);
             fw = new FileWriter(destFile);
