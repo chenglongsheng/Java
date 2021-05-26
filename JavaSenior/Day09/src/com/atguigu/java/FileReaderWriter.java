@@ -128,6 +128,44 @@ public class FileReaderWriter {
 
     }
 
+    @Test
+    public void testFileReaderFileWriter() {
+        FileReader fr = null;
+        FileWriter fw = null;
+        try {
+            //1.创建File类的对象，指明读入和写出的文件
+            File srcFile = new File("hello.text");
+            File destFile = new File("hello2.text");
 
+            //2.创建输入流和输出流的对象
+            fr = new FileReader(srcFile);
+            fw = new FileWriter(destFile);
+
+            //3.数据的写入和写出操作
+            char[] cbuf = new char[5];
+            int len;//记录每次读入的cbuf数组中的字符个数
+            while ((len = fr.read(cbuf)) != -1) {
+                fw.write(cbuf, 0, len);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //4.关闭流资源
+            try {
+                if (fw != null) {
+                    fw.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (fr != null) {
+                    fr.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 }
