@@ -99,21 +99,35 @@ public class FileReaderWriter {
             如果流使用的构造器是FileWriter(file,true)不会对原有文件覆盖，而是在原有文件基础上追加内容
      */
     @Test
-    public void testFileWriter() throws IOException {
-        // 1.提供File类的对象，指明写出到的文件
-        File file = new File("hello1.text");
+    public void testFileWriter() {
+        FileWriter fw = null;
+        try {
+            // 1.提供File类的对象，指明写出到的文件
+            File file = new File("hello1.text");
 
-        // 2.提供FileWriter的对象，用于数据的写出
+            // 2.提供FileWriter的对象，用于数据的写出
 //        FileWriter fw = new FileWriter(file);
-        FileWriter fw = new FileWriter(file,true);
+            fw = new FileWriter(file, true);
 
-        // 3.写出的操作
-        fw.write("I have a dream!\n");
-        fw.write("you need to have a dream!");
+            // 3.写出的操作
+            fw.write("I have a dream!\n");
+            fw.write("you need to have a dream!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fw != null) {
+                try {
+                    // 4.流资源的关闭
+                    fw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
-        // 4.流资源的关闭
-        fw.close();
 
     }
+
+
 
 }
