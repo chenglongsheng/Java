@@ -40,4 +40,52 @@ public class FileReaderWriter {
         fileReader.close();
     }
 
+    @Test
+    public void testFileReader1() {
+        // 1.File类的实例化
+        FileReader fr = null;
+        try {
+            File file = new File("hello.text");
+
+            // 2.FileReader流的实例化
+            fr = new FileReader(file);
+
+            // 3.读入操作
+            char[] cbuf = new char[5];
+            int len;
+            while ((len = fr.read(cbuf)) != -1) {
+                // 错误写法
+//                for (int i = 0; i < cbuf.length; i++) {
+//                    System.out.print(cbuf[i]);// HelloWorld123ld 原因：每次读入5个进数组，且是覆盖前一个，当个数不足5时，就出现123ld
+//            }
+                // 正确写法
+                for (int i = 0; i < len; i++) {
+                    System.out.print(cbuf[i]);
+
+                }
+                // 错误写法，对应方式一的错误写法
+//                String str = new String(cbuf);
+//                System.out.print(str);
+                // 正确写法
+                String str = new String(cbuf, 0, len);
+                System.out.print(str);
+            }
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fr != null) {
+
+                // 4.资源关闭
+                try {
+                    fr.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
+    }
+
 }
