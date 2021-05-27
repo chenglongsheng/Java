@@ -2,7 +2,10 @@ package com.atguigu.java;
 
 import org.junit.Test;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * 测试FileInputStream和FileOutputStream
@@ -92,6 +95,56 @@ public class FileInputStreamTest {
                 }
             }
         }
+    }
+
+    public void copyFile(String srcPath, String deskPath) {
+        FileInputStream fis = null;
+        FileOutputStream fos = null;
+        try {
+            File srcFile = new File(srcPath);
+            File desFile = new File(deskPath);
+
+            //
+            fis = new FileInputStream(srcFile);
+            fos = new FileOutputStream(desFile);
+
+            // 复制的过程
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = fis.read(buffer)) != -1) {
+                fos.write(buffer, 0, len);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @Test
+    public void testCopyFile() {
+        long start = System.currentTimeMillis();
+        String srcPath = "hello.text";
+        String deskPath = "hello3.text";//操作花费时间：5
+//        String srcPath = "F:\\mybatis\\mybatis-缓存.mov";
+//        String deskPath = "F:\\mybatis\\mybatis-缓存1.mov";
+        copyFile(srcPath, deskPath);
+        long end = System.currentTimeMillis();
+        System.out.println("操作花费时间：" + (end - start));//操作花费时间：1814
     }
 
 }
