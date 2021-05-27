@@ -2,9 +2,7 @@ package com.atguigu.java;
 
 import org.junit.Test;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * 测试FileInputStream和FileOutputStream
@@ -51,6 +49,49 @@ public class FileInputStreamTest {
             }
         }
 
+    }
+
+    /*
+    实现对图片的复制操作
+     */
+    @Test
+    public void testFileOutputStream() {
+        //
+        FileInputStream fis = null;
+        FileOutputStream fos = null;
+        try {
+            File srcFile = new File("yasuogou.jpg");
+            File desFile = new File("yasuogou1.jpg");
+
+            //
+            fis = new FileInputStream(srcFile);
+            fos = new FileOutputStream(desFile);
+
+            // 复制的过程
+            byte[] buffer = new byte[5];
+            int len;
+            while ((len = fis.read(buffer)) != -1) {
+                fos.write(buffer, 0, len);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
 }
