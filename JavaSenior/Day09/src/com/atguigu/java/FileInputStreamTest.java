@@ -138,13 +138,13 @@ public class FileInputStreamTest {
     @Test
     public void testCopyFile() {
         long start = System.currentTimeMillis();
-        String srcPath = "hello.text";
-        String deskPath = "hello3.text";//操作花费时间：5
-//        String srcPath = "F:\\mybatis\\mybatis-缓存.mov";
-//        String deskPath = "F:\\mybatis\\mybatis-缓存1.mov";
+//        String srcPath = "hello.text";
+//        String deskPath = "hello3.text";//操作花费时间：5
+        String srcPath = "E:\\io\\软件安装及解压方法..mp4";
+        String deskPath = "E:\\io\\软件安装及解压方法1..mp4";
         copyFile(srcPath, deskPath);
         long end = System.currentTimeMillis();
-        System.out.println("操作花费时间：" + (end - start));//操作花费时间：1814
+        System.out.println("操作花费时间：" + (end - start));//操作花费时间：167
     }
 
 }
