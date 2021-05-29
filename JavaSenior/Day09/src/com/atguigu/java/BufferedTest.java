@@ -13,7 +13,9 @@ import java.io.*;
  * BufferedWriter
  * <p>
  * 2.作用：提供流的读取写入速度
- *      提高读取写入的速度，内部提供了一个缓冲区
+ * 提高读取写入的速度，内部提供了一个缓冲区
+ * <p>
+ * 3.处理流：“套接”在已有的流基础上
  *
  * @author chenglongsheng
  * @create 2021-05-27 21:43
@@ -41,6 +43,7 @@ public class BufferedTest {
             byte[] Buffer = new byte[10];
             int len;
             while ((len = bis.read(Buffer)) != -1) {
+//                bos.flush();
                 bos.write(Buffer, 0, len);
             }
         } catch (IOException e) {
@@ -122,5 +125,48 @@ public class BufferedTest {
         testCopyFileWithBuffer(srcPath, deskPath);
         long end = System.currentTimeMillis();
         System.out.println("操作花费时间：" + (end - start));//操作花费时间：66
+    }
+
+    @Test
+    public void testBufferedReaderBufferedWriter() {
+        BufferedReader br = null;
+        BufferedWriter bw = null;
+        try {
+            //创建文件和流
+            br = new BufferedReader(new FileReader(new File("dbcp.txt")));
+            bw = new BufferedWriter(new FileWriter(new File("dbcp1.txt")));
+
+            //读写操作
+            //方式一： use char[]
+//            char[] cbuf = new char[1024];
+//            int len;
+//            while ((len = br.read(cbuf)) != -1) {
+//                bw.write(cbuf, 0, len);
+//            }
+
+            //方式二：use String
+            String data;
+            while ((data = br.readLine()) != null) {
+                bw.write(data);//data中不包含换行符
+                bw.newLine();//提供换行
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            //关闭资源
+            if (br != null)
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            if (bw != null)
+                try {
+                    bw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+        }
     }
 }
