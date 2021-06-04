@@ -2,9 +2,7 @@ package com.atguigu.java;
 
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 /**
  * 其它流的使用；
@@ -23,7 +21,7 @@ public class OtherStreamTest {
     System.out：标准的输出流，默认从控制台输出
      */
     @Test
-    public static void main(String[] args) {
+    public void test() {
 
         BufferedReader br = null;
         try {
@@ -52,6 +50,66 @@ public class OtherStreamTest {
             }
         }
 
+    }
+
+    /*
+    数据流
+    DataInputStream  DataOutputStream
+    用于读取或写出基本数据类型的变量或字符串
+     */
+    @Test
+    public void test1() {
+        DataOutputStream dos = null;
+        try {
+            dos = new DataOutputStream(new FileOutputStream("data.txt"));
+
+            dos.writeUTF("陈道兴");
+            dos.flush();
+            dos.writeInt(23);
+            dos.flush();
+            dos.writeBoolean(true);
+            dos.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (dos != null) {
+                try {
+                    dos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    /*
+    将文件中读取的基本数据类型变量和字符串读取到内存中，保存在变量中
+    读取不同的数据类型的顺序要和当初写文件一致
+     */
+    @Test
+    public void test2() {
+        DataInputStream dis = null;
+        try {
+            dis = new DataInputStream(new FileInputStream("data.txt"));
+
+            String s = dis.readUTF();
+            int i = dis.readInt();
+            boolean b = dis.readBoolean();
+
+            System.out.println("name:" + s);
+            System.out.println("age:" + i);
+            System.out.println("isMale:" + b);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (dis != null) {
+                try {
+                    dis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
 }
