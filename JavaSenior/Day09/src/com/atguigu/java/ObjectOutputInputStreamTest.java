@@ -24,6 +24,10 @@ public class ObjectOutputInputStreamTest {
             //
             oos.writeObject(new String("我爱你！"));
             oos.flush();
+
+            oos.writeObject(new Person("陈道兴", 23));
+            oos.flush();
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -49,8 +53,13 @@ public class ObjectOutputInputStreamTest {
 
             Object read = ois.readObject();
             String str;
+
+            Person p = (Person) ois.readObject();
+
             str = (String) read;
+
             System.out.println(str);
+            System.out.println(p);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
