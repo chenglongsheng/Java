@@ -23,6 +23,7 @@ public class TCPTest3 {
         InputStream is = null;
         try {
             socket = new Socket(InetAddress.getByName("127.0.0.1"), 9900);
+//            socket = new Socket(InetAddress.getByName("192.168.0.107"), 8989);
             os = socket.getOutputStream();
             fis = new FileInputStream(new File("girl.jpg"));
             byte[] buffer = new byte[1024];
