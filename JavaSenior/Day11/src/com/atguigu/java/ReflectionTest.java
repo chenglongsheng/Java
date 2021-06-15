@@ -2,6 +2,10 @@ package com.atguigu.java;
 
 import org.junit.Test;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 /**
  * @author chenglongsheng
  * @create 2021-06-15 22:05
@@ -23,6 +27,28 @@ public class ReflectionTest {
         // 在Person类外部，不可以通过Person类的对象调用其内部私有结构。
         // 比如：name、showNation()以及私有的构造器
 
+
+    }
+
+    // 反射之后的操作
+    @Test
+    public void test2() throws Exception {
+
+        Class personClass = Person.class;
+        // 1.通过反射，创建Person类的对象
+        Constructor constructor = personClass.getConstructor(String.class, int.class);
+        Object obj = constructor.newInstance("TOm", 12);
+        Person p = (Person) obj;
+        System.out.println(p.toString());
+        // 2.通过反射，调用对象指定的属性、方法
+        // 调用属性
+        Field age = personClass.getDeclaredField("age");
+        age.set(p,10);
+        System.out.println(p.toString());
+
+        // 调用方法
+        Method show = personClass.getDeclaredMethod("show");
+        show.invoke(p);
 
     }
 
