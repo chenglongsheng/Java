@@ -2,6 +2,9 @@ package com.atguigu.java;
 
 import org.junit.Test;
 
+import java.io.InputStream;
+import java.util.Properties;
+
 /**
  * @author chenglongsheng
  * @create 2021-06-23 16:21
@@ -25,5 +28,34 @@ public class ClassLoaderTest {
         ClassLoader classLoader2 = classLoader1.getParent();
         System.out.println(classLoader2);
 
+        ClassLoader classLoader3 = String.class.getClassLoader();
+        System.out.println(classLoader3);
+
     }
+
+    /*
+    Properties：读取配置文件
+     */
+    @Test
+    public void test2() throws Exception {
+
+        Properties pros = new Properties();
+        // 读取配置文件方式一：
+        // 此文件路径默认在当前module下
+//        FileInputStream fis = new FileInputStream("jdbc.properties");
+
+        // 读取配置文件方式二：使用ClassLoader
+        // 默认路径在src下
+        ClassLoader classLoader = ClassLoaderTest.class.getClassLoader();
+        InputStream is = classLoader.getResourceAsStream("jdbc1.properties");
+
+//        pros.load(fis);
+        pros.load(is);
+
+        String user = pros.getProperty("user");
+        String password = pros.getProperty("password");
+        System.out.println("user = " + user + ", password = " + password);
+
+    }
+
 }
