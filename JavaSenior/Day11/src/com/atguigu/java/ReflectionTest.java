@@ -50,6 +50,26 @@ public class ReflectionTest {
         Method show = personClass.getDeclaredMethod("show");
         show.invoke(p);
 
+        System.out.println("*****************");
+
+        // 通过反射，可以调用Person类的私有结构的。比如：私有的构造器、方法和属性
+        // 调用私有构造器
+        Constructor cons1 = personClass.getDeclaredConstructor(String.class);
+        cons1.setAccessible(true);
+        Person p1 = (Person) cons1.newInstance("Jerry");
+        System.out.println(p1);
+
+        // 调用私有属性
+        Field name = personClass.getDeclaredField("name");
+        name.setAccessible(true);
+        name.set(p1,"Hanmeimei");
+        System.out.println(p1);
+
+        // 调用私有方法
+        Method showNation = personClass.getDeclaredMethod("showNation", String.class);
+        showNation.setAccessible(true);
+        showNation.invoke(p1,"中国");// 相当于p1.showNation("中国")
+
     }
 
 }
