@@ -2,6 +2,8 @@ package com.atguigu.java;
 
 import org.junit.Test;
 
+import java.util.Random;
+
 /**
  * 通过发射创建对应的运行时类的对象
  *
@@ -29,6 +31,46 @@ public class NewInstanceTest {
         Person obj = clazz.newInstance();
         System.out.println(obj);
 
+    }
+
+    @Test
+    public void test2() {
+
+        int num = new Random().nextInt(3);// 0,1,2
+        String classPath = "";
+        switch (num) {
+            case 0:
+                classPath = "java.util.Date";
+                break;
+            case 1:
+                classPath = "java.lang.Object";
+                break;
+            case 2:
+                classPath = "com.atguigu.java.Person";
+                break;
+        }
+
+        Object obj = null;
+        try {
+            obj = getInstance(classPath);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
+        System.out.println(obj);
+
+    }
+
+    /*
+    创建一个指定类的对象。
+    classPath：指定类的全类名
+     */
+    public Object getInstance(String classPath) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+        Class clazz = Class.forName(classPath);
+        return clazz.newInstance();
     }
 
 }
