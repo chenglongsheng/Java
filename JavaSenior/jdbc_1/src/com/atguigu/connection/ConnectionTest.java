@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.Driver;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -61,6 +62,29 @@ public class ConnectionTest {
         Connection conn = driver.connect(url, info);
 
         System.out.println(conn);
+    }
+
+    /*
+    方式三：使用DriverManager替换Driver
+     */
+    @Test
+    public void testConnection3() throws ClassNotFoundException, IllegalAccessException, InstantiationException, SQLException {
+
+        Class clazz = Class.forName("com.mysql.jdbc.Driver");
+        Driver driver = (Driver) clazz.newInstance();
+
+        // 注册驱动
+        DriverManager.registerDriver(driver);
+
+        // 提供连接的三个基本信息
+        String url = "jdbc:mysql://localhost:3306/test";
+        String user = "root";
+        String password = "123456";
+
+        // 获取连接
+        Connection conn = DriverManager.getConnection(url, user, password);
+        System.out.println(conn);
+
     }
 
 }
