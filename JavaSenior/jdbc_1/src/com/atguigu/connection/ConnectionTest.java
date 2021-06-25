@@ -2,6 +2,8 @@ package com.atguigu.connection;
 
 import org.junit.Test;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
@@ -121,4 +123,33 @@ public class ConnectionTest {
         System.out.println(conn);
 
     }
+
+    /*
+    方式五：将数据库连接需要的4个基本信息声明在配置文件中，通过读取配置文件的方式，获取连接
+    实现数据和代码分离：解耦
+    如果需要修改配置信息，可以避免程序重新打包
+     */
+    @Test
+    public void testConnection5() throws IOException, ClassNotFoundException, SQLException {
+
+        // 读取配置文件
+        InputStream is = ConnectionTest.class.getClassLoader().getResourceAsStream("jdbc.properties");
+
+        Properties pros = new Properties();
+        pros.load(is);
+        String user = pros.getProperty("user");
+        String password = pros.getProperty("password");
+        String url = pros.getProperty("url");
+        String driverClass = pros.getProperty("driverClass");
+
+        // 加载驱动
+        Class.forName(driverClass);
+
+        // 获取连接
+        Connection conn = DriverManager.getConnection(url, user, password);
+
+        System.out.println(conn);
+
+    }
+
 }
