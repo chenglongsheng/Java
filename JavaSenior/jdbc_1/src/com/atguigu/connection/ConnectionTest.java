@@ -87,4 +87,38 @@ public class ConnectionTest {
 
     }
 
+    /*
+    方式四：使用DriverManager替换Driver
+     */
+    @Test
+    public void testConnection4() throws ClassNotFoundException, IllegalAccessException, InstantiationException, SQLException {
+
+        // 提供连接的三个基本信息
+        String url = "jdbc:mysql://localhost:3306/test";
+        String user = "root";
+        String password = "123456";
+
+        /*
+        加载Driver时，Driver实现类中静态代码块
+        static {
+            try {
+                DriverManager.registerDriver(new Driver());
+            } catch (SQLException var1) {
+                throw new RuntimeException("Can't register driver!");
+                }
+        }
+        自动注册。可以省略
+
+         */
+        Class.forName("com.mysql.jdbc.Driver");
+//        Driver driver = (Driver) clazz.newInstance();
+
+        // 注册驱动
+//        DriverManager.registerDriver(driver);
+
+        // 获取连接
+        Connection conn = DriverManager.getConnection(url, user, password);
+        System.out.println(conn);
+
+    }
 }
